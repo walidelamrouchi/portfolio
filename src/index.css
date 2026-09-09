@@ -1,0 +1,493 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Cabinet Grotesk", CabinetGrotesk-Variable, system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+}
+
+:root {
+  --animation-iteration: infinite;
+  --text-hero: clamp(2.5rem, 5vw + 1rem, 5.5rem);
+  --text-h2: clamp(1.75rem, 2.5vw + 1rem, 3rem);
+  --text-h3: clamp(1.125rem, 1vw + 1rem, 1.5rem);
+  --text-nav: clamp(2.25rem, 5vw + 0.5rem, 4.75rem);
+  --text-body: clamp(1rem, 0.5vw + 0.875rem, 1.125rem);
+  --text-small: clamp(0.75rem, 0.2vw + 0.7rem, 0.875rem);
+  --text-label: clamp(0.6875rem, 0.15vw + 0.65rem, 0.8125rem);
+  --space-section: clamp(3.5rem, 8vw, 8.5rem);
+  --space-gap: clamp(1rem, 2vw, 2.5rem);
+  --space-page: clamp(1.25rem, 4vw, 5rem);
+  --space-card: clamp(1rem, 1.5vw, 1.75rem);
+  --radius-card: clamp(0.85rem, 1.2vw, 1.25rem);
+  --content-max: 72rem;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-base: #000000;
+  --bg-mantle: #0a0a0a;
+  --bg-crust: #000000;
+  --surface: #141414;
+  --overlay: #1a1a1a;
+  --text: #f1f5f9;
+  --text-muted: #cbd5e1;
+  --accent: #b4befe;
+  --accent-2: #fab387;
+  --border: color-mix(in oklab, #f1f5f9 14%, transparent);
+  --glow: color-mix(in oklab, #b4befe 40%, transparent);
+  --on-accent: #000000;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg-base: #f8fafc;
+  --bg-mantle: #ffffff;
+  --bg-crust: #e2e8f0;
+  --surface: #e2e8f0;
+  --overlay: #cbd5e1;
+  --text: #0f172a;
+  --text-muted: #334155;
+  --accent: #4c63d9;
+  --accent-2: #d45a0c;
+  --border: color-mix(in oklab, #0f172a 16%, transparent);
+  --glow: color-mix(in oklab, #4c63d9 35%, transparent);
+  --on-accent: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  view-transition-name: root;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.65;
+  background: var(--bg-base);
+  color: var(--text);
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 40%, transparent);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-page);
+  top: 0.75rem;
+  z-index: 80;
+  transform: translateY(-180%);
+  background: var(--bg-mantle);
+  color: var(--text);
+  padding: 0.5rem 0.85rem;
+  border-radius: 0.5rem;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.page-shell {
+  width: min(100% - var(--space-page) * 2, var(--content-max));
+  margin-inline: auto;
+}
+
+.section-block {
+  padding-block: var(--space-section);
+}
+
+.hero-title {
+  font-size: var(--text-hero);
+  line-height: 1.08;
+  letter-spacing: normal;
+  font-weight: 800;
+  padding-block: 0.06em;
+  overflow: visible;
+}
+
+.section-title {
+  font-size: var(--text-h2);
+  line-height: 1.18;
+  letter-spacing: normal;
+  font-weight: 700;
+  padding-block: 0.08em;
+  overflow: visible;
+}
+
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.reveal-mask {
+  overflow: hidden;
+  display: block;
+}
+
+.dot-grid-mask {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--text) 38%, transparent) 1.1px,
+    transparent 1.35px
+  );
+  background-size: 11px 11px;
+  mask-image: linear-gradient(90deg, #000 10%, transparent 88%);
+  -webkit-mask-image: linear-gradient(90deg, #000 10%, transparent 88%);
+}
+
+.sidebar-glow {
+  background: radial-gradient(circle at 70% 45%, color-mix(in oklab, #f1f5f9 18%, transparent), transparent 62%);
+  filter: blur(80px);
+}
+
+::view-transition-old(root) {
+  animation: none;
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  animation: theme-ripple 0.72s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
+}
+
+@keyframes theme-ripple {
+  from {
+    clip-path: circle(0px at var(--ripple-x) var(--ripple-y));
+  }
+  to {
+    clip-path: circle(var(--ripple-r) at var(--ripple-x) var(--ripple-y));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .spotlight-blob {
+    filter: blur(80px);
+  }
+}
+
+.drawer-backdrop {
+  background: color-mix(in oklab, #000000 55%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.cosmic-parallax-container {
+  --animation-iteration: infinite;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+.cosmic-starfield-layer {
+  --animation-iteration: infinite;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}
+
+.planet-silhouette-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.planet-horizon,
+.planet-earth,
+#horizon,
+#earth {
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  height: 55%;
+  border-radius: 100%;
+}
+
+.planet-horizon {
+  top: calc(var(--horizon-y) - 2%);
+}
+
+.planet-earth {
+  top: var(--horizon-y);
+  background: #000000;
+}
+
+.planet-horizon-glow {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  box-shadow:
+    inset 0 -12px 40px 8px rgb(147 197 253 / 0.45),
+    inset 0 0 90px 28px rgb(96 165 250 / 0.28),
+    0 -8px 50px 18px rgb(59 130 246 / 0.55),
+    0 0 100px 36px rgb(96 165 250 / 0.4),
+    0 0 180px 70px rgb(37 99 235 / 0.32),
+    0 0 260px 110px rgb(180 190 254 / 0.22);
+}
+
+#horizon {
+  z-index: 2;
+  top: 56%;
+}
+
+#horizon .glow {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  box-shadow:
+    inset 0 -12px 40px 8px rgb(147 197 253 / 0.45),
+    inset 0 0 90px 28px rgb(96 165 250 / 0.28),
+    0 -8px 50px 18px rgb(59 130 246 / 0.55),
+    0 0 100px 36px rgb(96 165 250 / 0.4),
+    0 0 180px 70px rgb(37 99 235 / 0.32),
+    0 0 260px 110px rgb(180 190 254 / 0.22);
+}
+
+#earth {
+  z-index: 3;
+  top: 58%;
+  background: #000;
+}
+
+.cosmic-stars,
+.cosmic-stars-medium,
+.cosmic-stars-large {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+}
+
+.cosmic-stars {
+  width: 1px;
+  height: 1px;
+  animation: animStar 40s linear var(--animation-iteration);
+}
+
+.cosmic-stars::after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: inherit;
+}
+
+.cosmic-stars-medium {
+  width: 2px;
+  height: 2px;
+  animation: animStar 80s linear var(--animation-iteration);
+}
+
+.cosmic-stars-medium::after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: inherit;
+}
+
+.cosmic-stars-large {
+  width: 3px;
+  height: 3px;
+  animation: animStar 120s linear var(--animation-iteration);
+}
+
+.cosmic-stars-large::after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: inherit;
+}
+
+#title {
+  position: absolute;
+  z-index: 10;
+  top: 36%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f1f5f9;
+  font-size: clamp(2rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  white-space: nowrap;
+  animation: animGravity 8s ease-in-out var(--animation-iteration);
+}
+
+#subtitle {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  gap: 0.75rem;
+  transform: translateX(-50%);
+  color: #f1f5f9;
+  font-size: clamp(0.7rem, 1.6vw, 1.1rem);
+  letter-spacing: 0.28em;
+}
+
+.subtitle-part-1 {
+  animation: animDont 8s ease-in-out var(--animation-iteration);
+}
+
+.subtitle-part-2 {
+  animation: animLet 8s ease-in-out var(--animation-iteration);
+}
+
+.subtitle-part-3 {
+  animation: animGo 8s ease-in-out var(--animation-iteration);
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+@keyframes animGravity {
+  0% {
+    transform: translate(-50%, -26px);
+    opacity: 0;
+  }
+  30%,
+  80% {
+    letter-spacing: 40px;
+    padding-left: 40px;
+    transform: translate(-50%, 0px);
+    opacity: 1;
+  }
+  92%,
+  100% {
+    letter-spacing: 35px;
+    padding-left: 35px;
+    transform: translate(-50%, -4px);
+    opacity: 0;
+  }
+}
+
+@keyframes animDont {
+  0%,
+  15% {
+    transform: translateY(-26px);
+    opacity: 0;
+  }
+  35%,
+  80% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  92%,
+  100% {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+}
+
+@keyframes animLet {
+  0%,
+  25% {
+    transform: translateY(-26px);
+    opacity: 0;
+  }
+  45%,
+  80% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  92%,
+  100% {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+}
+
+@keyframes animGo {
+  0%,
+  35% {
+    transform: translateY(-26px);
+    opacity: 0;
+  }
+  55%,
+  80% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  92%,
+  100% {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cosmic-stars,
+  .cosmic-stars-medium,
+  .cosmic-stars-large,
+  #title,
+  .subtitle-part-1,
+  .subtitle-part-2,
+  .subtitle-part-3 {
+    animation: none !important;
+  }
+
+  #title,
+  .subtitle-part-1,
+  .subtitle-part-2,
+  .subtitle-part-3 {
+    opacity: 1;
+    transform: none;
+  }
+}
