@@ -136,31 +136,31 @@ export const content: SiteContent = {
       status: "complete",
       statusLabel: "Terminé",
       summary:
-        "Gestion d’objets trouvés et perdus pour la Faculté Sidi Mohamed Ben Abdellah de Taza : déclarations, suivi, et interface claire pour étudiants et administration.",
-      stack: ["React.js", "PHP", "MySQL"],
+        "Lost and found management for the Sidi Mohamed Ben Abdellah Faculty in Taza: reporting, tracking, and a clear interface for students and administration.",
+      stack: ["React.js", "PHP","Tailwind CSS" , "MySQL"],
       imageAlt: "Placeholder FindIt — TODO : ajouter un vrai screenshot.",
     },
     {
-      id: "eco-defense",
-      title: "Eco-Défense",
-      year: "2024",
+      id: "Banking Management System",
+      title: "Banking Management System",
+      year: "2026 ",
       status: "complete",
       statusLabel: "Terminé",
       summary:
-        "Jeu en Java pensé avec une architecture clean : règles séparées de l’affichage, pour rester lisible et extensible.",
-      stack: ["Java"],
-      imageAlt: "Placeholder Eco-Défense — TODO : ajouter un vrai screenshot.",
+        "Full-stack banking application simulating account, card, and transaction management (deposits, withdrawals, transfers), with real business logic and a secure architecture.",
+      stack: ["Spring Boot","React","Tailwind CSS", "PostgreSQL"],
+      imageAlt: "Placeholder Banking Management System — TODO : ajouter un vrai screenshot.",
     },
     {
-      id: "talim",
-      title: "Ta'lim",
-      year: "2025",
+      id: "Todo App",
+      title: "Todo App",
+      year: "2026",
       status: "progress",
       statusLabel: "En cours",
       summary:
-        "Tracker Excel / suivi pédagogique. TODO : préciser s’il s’agit du tracker Ta'lim ou d’un projet Spring Boot en cours, et coller le vrai résumé.",
-      stack: ["Excel", "Spring Boot"],
-      imageAlt: "Placeholder Ta'lim — TODO : ajouter un vrai screenshot.",
+        "A minimalist full-stack Todo application enabling users to create, read, update, and delete tasks through a clean web interface.",
+      stack: ["Django", "HTML/CSS", "JavaScript", "SQLite"],
+      imageAlt: "Placeholder Todo App — TODO : ajouter un vrai screenshot.",
     },
   ],
   contact: {
@@ -170,7 +170,7 @@ export const content: SiteContent = {
     // TODO: remplace par ton email réel
     email: "walid@example.com",
     socials: [
-      { id: "email", label: "Email", href: "mailto:walid@example.com" },
+      { id: "email", label: "Email", href: "mailto:elamrouchi.oualid@example.com" },
       // TODO: URL GitHub réelle
       { id: "github", label: "GitHub", href: "https://github.com" },
       // TODO: URL LinkedIn réelle

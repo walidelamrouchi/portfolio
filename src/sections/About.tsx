@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
-import philosophyBackground from "../assets/imgs/philosophy-bg.jpg";
+import philosophyBackground from "../assets/imgs/philosophy-bg.png";
 
 export default function About() {
   const containerRef = useRef<HTMLElement>(null);
